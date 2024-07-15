@@ -111,6 +111,7 @@ Typical usage will generally define a de-tuning factor (`-p`/`--power`) and
 possibly a relative error cutoff (`-e`/`--error`) for generating weights.
 
 ```bash
+# Chenge the de-tuning factor and relative error cut
 mesh2ww /path/to/meshtal.msht 104 --power 0.70 --error 0.25
 ```
 
@@ -124,6 +125,7 @@ imporves.
 The weight window file may be renamed as needed.
 
 ```bash
+# Chenge output file name to "mywwmesh.wwinp"
 mesh2ww /path/to/meshtal.msht 104 --output mywwmesh.wwinp
 ```
 
@@ -133,6 +135,7 @@ It is often fine to simply generate a global weight window using the 'Total'
 group rather than every explicit energy/time group.
 
 ```bash
+# Only use the Total energy/time groups
 mesh2ww /path/to/meshtal.msht 104 --total
 ```
 
@@ -159,6 +162,7 @@ The usage is as simple as combining multiple argument sets with `+` as the
 delimiter.
 
 ```bash
+# Syntax for combining weights for multiple particle types
 mesh2ww <meshtal> <number> [options] +      \
         <meshtal> <number> [options] +      \
         <meshtal> <number> [options]
@@ -173,13 +177,14 @@ If all of these are the same geometry, they may be combined with all the
 usual options applied to each tally individually:
 
 ```bash
+# Make weight windows for neutrons, photons, and electrons
 mesh2ww NP_tallies.msht 14                   +      \
         NP_tallies.msht 24 -p 0.8 -e 0.15    +      \
         E_tallies.msht  34 --total                  \
 ```
 
 Here the neutron tally uses defaults, the photon tally de-tunes weights, and the
-electron tally only uses the total energy/time bins.  
+electron tally only uses the total energy/time bins.
 
 ### Writing weights to VTK
 
@@ -189,6 +194,7 @@ A Visual Toolkit file can be generated for every weight window set using the
 **WARNING: Cylindrical weight window plotting is a WIP**
 
 ```bash
+# Write to VTK for plotting 
 mesh2ww file.msht 14 --vtk
 ```
 
@@ -196,6 +202,7 @@ Of course all the usual options are available, such as increasing the
 resolution of cylindrical meshes with few theta bins.
 
 ```bash
+# Change cylindrical mesh resolution
 mesh2ww file.msht 14 --vtk --resolution 2
 ```
 
@@ -203,10 +210,11 @@ Advanced options include changing the file format, byte ordering of binary
 outputs, and which compressor to use for XML.
 
 ```bash
-mesh2ww file.msht 14 --vtk          \\
-            --format legacy-ascii   \\
-            --compressor lzma       \\
-            --endian big-endian  
+# Change VTK file format options
+mesh2ww file.msht 14 --vtk          \
+            --format legacy-ascii   \
+            --compressor lzma       \
+            --endian big-endian
 ```
 
 ### Advanced de-tuning
@@ -241,6 +249,6 @@ Energy 100.0
 ```
 
 ```bash
-# Set energy group power factors individually
+# Set energy and time group power factors individually
 mesh2ww /path/to/meshtal.msht 104 --power 0.9 0.7   0.8 0.8   0.6 0.5
 ```
