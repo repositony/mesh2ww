@@ -8,7 +8,7 @@ name         = "mesh2ww"
 readme       = "readme.md"
 repository   = "https://github.com/repositony/mesh2ww"
 rust-version = "1.77"
-version      = "0.1.12"
+version      = "0.1.13"
 
 [dependencies]
 anyhow = "1.0"

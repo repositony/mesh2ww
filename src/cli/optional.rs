@@ -14,7 +14,7 @@ pub fn optional_args() -> [Arg; 12] {
         arg_resolution(),
         arg_endian(),
         arg_compressor(),
-        arg_update(),
+        // arg_update(),
     ]
 }
 
@@ -193,18 +193,18 @@ fn arg_compressor() -> Arg {
         .hide_default_value(true)
 }
 
-fn arg_update() -> Arg {
-    Arg::new("update")
-        .short('u')
-        .long("update")
-        .help_heading("Weight options")
-        .help("Path to previous weights ('cached_weights' default)")
-        .long_help(
-            "Defaults to \"cached_weights\". Contains weights and associated errors for updating better weight values in iterative runs.",
-        )
-        .required(false)
-        .action(ArgAction::Set)
-        .value_parser(value_parser!(String))
-        .value_name("path")
-        .hide_default_value(true)
-}
+// fn arg_update() -> Arg {
+//     Arg::new("update")
+//         .short('u')
+//         .long("update")
+//         .help_heading("Weight options")
+//         .help("Path to previous weights ('cached_weights' default)")
+//         .long_help(
+//             "Defaults to \"cached_weights\". Contains weights and associated errors for updating better weight values in iterative runs.",
+//         )
+//         .required(false)
+//         .action(ArgAction::Set)
+//         .value_parser(value_parser!(String))
+//         .value_name("path")
+//         .hide_default_value(true)
+// }

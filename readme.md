@@ -17,7 +17,6 @@ Weight options:
   -e, --error <num>...  Maximum rel. error, use analogue above
   -t, --total           Weights from 'Total' groups only
   -s, --scale <num>     Multiply all weights by a constant
-  -u, --update <path>   Path to previous weights ('cached_weights' default)
 
 Global file options:
   -o, --output <path>  Name of output file ('wwinp' default)
