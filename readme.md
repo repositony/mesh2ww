@@ -95,8 +95,11 @@ All functionality is fully supported for both rectangular and cylindrical meshes
 | Mesh geometry | Supported? | MCNP designators |
 | ------------- | ---------- | ---------------- |
 | Rectangular   | Yes        | rec, xyz         |
-| Cylindrical   | Yes        | cyl, rzt         |
+| Cylindrical   | Partial    | cyl, rzt         |
 | Spherical     | No         | sph, rpt         |
+
+Cylindrical meshes are fully supported and will generate weight window files,
+but may not yet be written to cylindrical VTK files for plotting.
 
 Currently spherical meshes are not supported because barely anyone knows
 about them, let alone uses them. They are therefore a low priority, but raise
@@ -193,7 +196,7 @@ A Visual Toolkit file can be generated for every weight window set using the
 **WARNING: Cylindrical weight window plotting is a WIP**
 
 ```bash
-# Write to VTK for plotting 
+# Write to VTK for plotting
 mesh2ww file.msht 14 --vtk
 ```
 
