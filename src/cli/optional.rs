@@ -1,7 +1,7 @@
 use crate::wrappers::{CliByteOrder, CliCompressor, CliVtkFormat};
 use clap::{value_parser, Arg, ArgAction};
 
-pub fn optional_args() -> [Arg; 12] {
+pub fn optional_args() -> [Arg; 11] {
     [
         arg_power(),
         arg_error(),
