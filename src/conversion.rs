@@ -2,9 +2,9 @@ use crate::logging;
 use crate::parser::{self, VtkConfig, WWConfig};
 use crate::wrappers::{CliByteOrder, CliCompressor, CliVtkFormat};
 
-use ntools::format::f;
 use ntools::mesh::reader::MeshtalReader;
 use ntools::mesh::{Mesh, Particle};
+use ntools::utils::f;
 use ntools::weights::vtk::{write_vtk, WeightsToVtk, WeightsToVtkBuilder};
 use ntools::weights::WeightWindow;
 use ntools::wwgen;
