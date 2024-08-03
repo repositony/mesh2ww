@@ -15,7 +15,7 @@ use crate::cli::help_wanted;
 use ntools::weights::write_multi_particle;
 
 // other crates
-use anyhow::Result;
+use anyhow::{anyhow, Result};
 use log::{debug, info};
 
 // Convenience types
@@ -32,10 +32,14 @@ fn main() -> Result<()> {
 
     // split up the command line args by the '+' delimeter and parse each one
     // through Clap to verify the arguments
+    debug!("Parsing command line sets");
     let ww_config_sets = parser::ww_config();
+    if ww_config_sets.is_empty() {
+        return Err(anyhow!("No valid meshtal files were found"));
+    }
 
     // collect up all weight windows, just exclude any missing and warn the user
-    info!("Generating weight windows");
+    debug!("Generating weight windows");
     let particle_weights = conversion::collect_weight_windows(ww_config_sets)?;
 
     // Write the weight window file

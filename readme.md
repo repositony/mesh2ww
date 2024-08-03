@@ -95,11 +95,8 @@ All functionality is fully supported for both rectangular and cylindrical meshes
 | Mesh geometry | Supported? | MCNP designators |
 | ------------- | ---------- | ---------------- |
 | Rectangular   | Yes        | rec, xyz         |
-| Cylindrical   | Partial    | cyl, rzt         |
+| Cylindrical   | Yes        | cyl, rzt         |
 | Spherical     | No         | sph, rpt         |
-
-Cylindrical meshes are fully supported and will generate weight window files,
-but may not yet be written to cylindrical VTK files for plotting.
 
 Currently spherical meshes are not supported because barely anyone knows
 about them, let alone uses them. They are therefore a low priority, but raise

@@ -5,8 +5,8 @@ use crate::wrappers::{CliByteOrder, CliCompressor, CliVtkFormat};
 use crate::ArgSet;
 
 use anyhow::{anyhow, Result};
-use clap::{ArgMatches};
-use log::{trace, warn};
+use clap::ArgMatches;
+use log::warn;
 use std::env;
 use std::path::Path;
 
@@ -93,7 +93,6 @@ fn split_argument_sets() -> Vec<ArgSet> {
 
     for s in raw_args.split(|p| p == "+") {
         tallies.push(std::iter::once(name.clone()).chain(s.to_owned()).collect());
-        trace!("{:?}", tallies.last());
     }
 
     tallies

@@ -99,14 +99,6 @@ fn generate_weight_window(mesh: &Mesh, cli: &WWConfig) -> WeightWindow {
 }
 
 fn generate_vtk(weight_window: &WeightWindow, cli: &VtkConfig) -> Result<()> {
-    // todo: skip cylindrical meshes while vtk conversion is being implemented
-
-    // Mesh type 1=rec, 2=cyl, 3=sph
-    if weight_window.nwg != 1 {
-        warn!("Warning: Cylindrical/Spherical conversion to VTK not yet implemented");
-        return Ok(());
-    }
-
     // Set up the conversion
     let convertor = build_converter(cli);
     let vtk = convertor.convert(weight_window);
