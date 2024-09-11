@@ -197,8 +197,6 @@ electron tally only uses the total energy/time bins.
 A Visual Toolkit file can be generated for every weight window set using the
 `--vtk` flag.
 
-**WARNING: Cylindrical weight window plotting is a WIP**
-
 ```bash
 # Write to VTK for plotting
 mesh2ww file.msht 14 --vtk
