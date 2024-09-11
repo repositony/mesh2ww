@@ -1,4 +1,4 @@
-# mesh2ww
+# MCNP mesh to weight windows (`mesh2ww`)
 
 Command line tool to convert MCNP mesh tallies of any type to a mesh-based
 global weight window using the magic method with configurable de-tuning options.
