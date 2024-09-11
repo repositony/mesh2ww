@@ -4,8 +4,6 @@ Command line tool to convert MCNP mesh tallies of any type to a mesh-based
 global weight window using the magic method with configurable de-tuning options.
 
 ```text
-Conversion of meshtal file meshes to MCNP weight windows
-
 Usage: mesh2ww <meshtal> <number> [options] [+]
 
 Arguments:
@@ -52,17 +50,26 @@ All executables are under `~/.cargo/bin/`, which should already be in your path
 after installing Rust.
 
 <details>
-  <summary>Click here if you have never used Rust</summary>
+  <summary>Click here if you have never used Rust</summary><br />
 
 If you have never used the Rust programming language, the toolchain is easily
 installed from the [official website](https://www.rust-lang.org/tools/install)
 
+### Unix (Linux/MacOS)
+
+Run the following to download and run `rustup-init.sh`, which will install 
+the Rust toolchain for your platform.
+
 ```shell
-curl https://sh.rustup.rs -sSf | sh
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 ```
 
 This should have added `source $HOME/.cargo/env` to the bash profile, so update
 your environment with `source ~/.bashrc`.
+
+### Windows
+
+On Windows, download and run `rustup-init.exe` from the [official installs](https://www.rust-lang.org/tools/install).
 
 </details>
 
