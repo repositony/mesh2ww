@@ -11,13 +11,13 @@ rust-version = "1.82"
 version      = "1.0.0"
 
 [dependencies]
+# core library, not currently for public use
 ntools = { git = "ssh://git@github.com/repositony/ntools.git", branch = "main", features = [
     "mesh",
     "weights",
     "wwgen",
 ] }
 
-# core library, not currently for public use
 # external
 anyhow    = "1.0.94"
 bincode   = "1.3.3"

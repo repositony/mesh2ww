@@ -80,6 +80,46 @@ Spherical meshes are not supported because barely anyone knows about them, let
 alone uses them. They are therefore a low priority, but raise an issue if anyone
 needs it.
 
+## Install
+
+Download and unpack the latest binary executable release [here](https://github.com/repositony/mesh2ww/releases/latest) for running in a terminal/powershell.
+
+### Linux/MacOS
+
+Unpack the relevant executable from the [latest release](https://github.com/repositony/mesh2ww/releases/latest).
+
+```bash
+# Linux
+tar -xjf mesh2ww-x86_64-unknown-linux-gnu.tar.xz  # Generic linux
+tar -xjf mesh2ww-aarch64-unknown-linux-gnu.tar.xz # ARM64 Linux
+
+# MacOS
+tar -xjf mesh2ww-x86_64-apple-darwin.tar.xz       # Intel macOS
+tar -xjf mesh2ww-aarch64-apple-darwin.tar.xz      # Apple Silicon macOS
+```
+
+And either run from there or add the executable to your `$PATH`.
+
+```bash
+./mesh2ww -h
+```
+
+### Windows
+
+Extract `mesh2ww-x86_64-pc-windows-msvc.zip` from the [latest release](https://github.com/repositony/mesh2ww/releases/latest).
+
+Navigate to this folder and run from powershell.
+
+```bash
+.\mesh2ww.exe -h
+```
+
+This may be set as an alias for convenience.
+
+```powershell
+Set-Alias -Name mesh2ww -Value C:\Path\To\Folder\mesh2ww.exe
+```
+
 ## Examples
 
 ### Tuning weights
