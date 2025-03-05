@@ -1,36 +1,41 @@
 # MCNP mesh to weight windows (`mesh2ww`)
 
+[![GitHub release](https://img.shields.io/github/v/release/repositony/mesh2ww?include_prereleases)](https://github.com/repositony/mesh2ww/releases/latest)
+
 Command line tool to convert MCNP mesh tallies of any type to a mesh-based
-global weight window using the magic method with configurable de-tuning options.
+global weight window.
+
+This uses the [Method of Automatic Generation of Importances by Calculation](https://scientific-publications.ukaea.uk/wp-content/uploads/Published/INTERN1.pdf)
+(a.k.a MAGIC) with configurable de-tuning options.
 
 ```text
 Usage: mesh2ww <meshtal> <number> [options] [+]
 
 Arguments:
-  [meshtal]  Path to meshtal file
-  [number]   Mesh tally identifier
+  [meshtal]               Path to meshtal file
+  [number]                Mesh tally identifier
 
 Weight options:
-  -p, --power <num>...  Set the softening/de-tuning factor
-  -e, --error <num>...  Maximum rel. error, use analogue above
-  -t, --total           Weights from 'Total' groups only
-  -s, --scale <num>     Multiply all weights by a constant
+  -p, --power <num>...    Set the softening/de-tuning factor
+  -e, --error <num>...    Maximum rel. error, use analogue above
+  -t, --total             Weights from 'Total' groups only
+  -s, --scale <num>       Multiply all weights by a constant
 
 Global file options:
-  -o, --output <path>  Name of output file ('wwinp' default)
-      --trim           Exclude unused particles from wwinp header
+  -o, --output <path>     Name of output file ('wwinp' default)
+      --trim              Exclude unused particles from wwinp header
 
 Global VTK options:
-      --vtk               Write VTK files for plotting
+      --vtk               Write VTK files for plotting weights
   -f, --format <fmt>      Set the VTK file format
   -r, --resolution <cst>  Cylindrical mesh resolution
       --endian <end>      Byte ordering/endian
       --compressor <cmp>  Compression method for XML
 
 Flags:
-  -v, --verbose...  Verbose logging (-v, -vv)
-  -q, --quiet       Supress all log output (overrules --verbose)
-      --help        Print help info (see more with '--help')
+  -v, --verbose...        Verbose logging (-v, -vv)
+  -q, --quiet             Supress all log output (overrules --verbose)
+      --help              Print help info (see more with '--help')
 
 See --help for detail and examples
 ```
@@ -38,44 +43,9 @@ See --help for detail and examples
 Help is printed with the `-h` flag, and `--help` will show default values,
 examples, and any important behaviour.
 
-## Install
-
-Direct from github:
-
-```shell
-cargo install --git https://github.com/repositony/mesh2ww.git
-```
-
-All executables are under `~/.cargo/bin/`, which should already be in your path
-after installing Rust.
-
-<details>
-  <summary>Click here if you have never used Rust</summary><br />
-
-If you have never used the Rust programming language, the toolchain is easily
-installed from the [official website](https://www.rust-lang.org/tools/install)
-
-### Unix (Linux/MacOS)
-
-Run the following to download and run `rustup-init.sh`, which will install 
-the Rust toolchain for your platform.
-
-```shell
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-```
-
-This should have added `source $HOME/.cargo/env` to the bash profile, so update
-your environment with `source ~/.bashrc`.
-
-### Windows
-
-On Windows, download and run `rustup-init.exe` from the [official installs](https://www.rust-lang.org/tools/install).
-
-</details>
-
 ## Overview
 
-### Supported mesh formats
+### Supported output formats
 
 For more detail, see the `OUT` keyword for the `FMESH` card definition in
 the [MCNPv6.2](https://mcnp.lanl.gov/pdf_files/TechReport_2017_LANL_LA-UR-17-29981_WernerArmstrongEtAl.pdf)
@@ -91,13 +61,14 @@ user manuals.
 | JK            | Yes        | 2D matrix of J (col) and K (row) data, grouped by I |
 | CUV (UKAEA)   | Yes        | UKAEA Cell-under-Voxel column data                  |
 | NONE          | N/A        | `NONE` or unknown output format                     |
+| XDMF          | No         | On the TODO list                                    |
 
-Once I get my paws on MCNPv6.3 this will be extended to include the new
-COLSCI, CFSCI, and XDMF/HDF5 formats.
+Extension to MCNPv6.3 for the new COLSCI, CFSCI, and XDMF/HDF5 formats is not
+difficult, I just need some time to work on it.
 
 ### Supported mesh geometries
 
-All functionality is fully supported for both rectangular and cylindrical meshes.
+All functionality is fully supported for rectangular and cylindrical meshes.
 
 | Mesh geometry | Supported? | MCNP designators |
 | ------------- | ---------- | ---------------- |
@@ -105,9 +76,9 @@ All functionality is fully supported for both rectangular and cylindrical meshes
 | Cylindrical   | Yes        | cyl, rzt         |
 | Spherical     | No         | sph, rpt         |
 
-Currently spherical meshes are not supported because barely anyone knows
-about them, let alone uses them. They are therefore a low priority, but raise
-an issue if anyone needs it.
+Spherical meshes are not supported because barely anyone knows about them, let
+alone uses them. They are therefore a low priority, but raise an issue if anyone
+needs it.
 
 ## Examples
 
