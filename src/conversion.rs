@@ -2,19 +2,17 @@ use crate::logging;
 use crate::parser::{self, VtkConfig, WWConfig};
 use crate::wrappers::{CliByteOrder, CliCompressor, CliVtkFormat};
 
-use ntools::mesh::reader::MeshtalReader;
 use ntools::mesh::{Mesh, Particle};
 use ntools::utils::f;
-use ntools::weights::vtk::{write_vtk, WeightsToVtk, WeightsToVtkBuilder};
 use ntools::weights::WeightWindow;
+use ntools::weights::vtk::{WeightsToVtk, WeightsToVtkBuilder, write_vtk};
 use ntools::wwgen;
 
 use vtkio::model::ByteOrder;
 use vtkio::xml::Compressor;
 
-use anyhow::{anyhow, Result};
+use anyhow::{Result, anyhow};
 use log::{debug, info, warn};
-use std::path::Path;
 
 pub fn collect_weight_windows(ww_config_sets: Vec<WWConfig>) -> Result<Vec<WeightWindow>> {
     // prepare for writing to VTK files if needed
@@ -71,16 +69,11 @@ pub fn collect_weight_windows(ww_config_sets: Vec<WWConfig>) -> Result<Vec<Weigh
 }
 
 fn try_meshtal_read(cli: &WWConfig) -> Result<Mesh> {
-    let path: &Path = Path::new(&cli.meshtal);
-
-    let mut reader = MeshtalReader::new();
-    reader.set_target_id(cli.number);
-    if logging::is_quiet() || logging::verbosity() > 1 {
-        reader.disable_progress();
+    if logging::is_quiet() {
+        Ok(ntools::mesh::read_target(&cli.meshtal, cli.number)?)
+    } else {
+        Ok(ntools::mesh::read_target_pb(&cli.meshtal, cli.number)?)
     }
-
-    let mut mesh = reader.parse(path)?;
-    Ok(std::mem::take(&mut mesh[0]))
 }
 
 fn generate_weight_window(mesh: &Mesh, cli: &WWConfig) -> WeightWindow {

@@ -9,11 +9,11 @@ This uses the [Method of Automatic Generation of Importances by Calculation](htt
 (a.k.a MAGIC) with configurable de-tuning options.
 
 ```text
-Usage: mesh2ww <meshtal> <number> [options] [+]
+Usage: mesh2ww <file> <number> [options] [+]
 
 Arguments:
-  [meshtal]               Path to meshtal file
-  [number]                Mesh tally identifier
+  <file>                  Path to meshtal file
+  <number>                Mesh tally identifier
 
 Weight options:
   -p, --power <num>...    Set the softening/de-tuning factor
@@ -54,6 +54,7 @@ user manuals.
 
 | Output format | Supported? | Description                                         |
 | ------------- | ---------- | --------------------------------------------------- |
+| XDMF/HDF5     | Yes        | MCNP >6.3 runtape HDF5 format                       |
 | COL           | Yes        | Column data (MCNP default)                          |
 | CF            | Yes        | Column data including voxel volume                  |
 | IJ            | Yes        | 2D matrix of I (col) and J (row) data, grouped by K |
@@ -61,10 +62,6 @@ user manuals.
 | JK            | Yes        | 2D matrix of J (col) and K (row) data, grouped by I |
 | CUV (UKAEA)   | Yes        | UKAEA Cell-under-Voxel column data                  |
 | NONE          | N/A        | `NONE` or unknown output format                     |
-| XDMF          | No         | On the TODO list                                    |
-
-Extension to MCNPv6.3 for the new COLSCI, CFSCI, and XDMF/HDF5 formats is not
-difficult, I just need some time to work on it.
 
 ### Supported mesh geometries
 
@@ -129,7 +126,7 @@ possibly a relative error cutoff (`-e`/`--error`) for generating weights.
 
 ```bash
 # Chenge the de-tuning factor and relative error cut
-mesh2ww /path/to/meshtal.msht 104 --power 0.70 --error 0.25
+mesh2ww /path/to/file.msht 104 --power 0.70 --error 0.25
 ```
 
 The `--power` value modifies calculated weights by `w => w^(power)`, which
@@ -143,7 +140,7 @@ The weight window file may be renamed as needed.
 
 ```bash
 # Chenge output file name to "mywwmesh.wwinp"
-mesh2ww /path/to/meshtal.msht 104 --output mywwmesh.wwinp
+mesh2ww file.msht 104 --output mywwmesh.wwinp
 ```
 
 ### Simplified weight window
@@ -153,7 +150,7 @@ group rather than every explicit energy/time group.
 
 ```bash
 # Only use the Total energy/time groups
-mesh2ww /path/to/meshtal.msht 104 --total
+mesh2ww file.msht 104 --total
 ```
 
 This is probably the recommended use case for any finely binned groups, as
@@ -167,7 +164,7 @@ These may be rescaled by a constant multiplier.
 
 ```bash
 # Multiply all normalised weights by x2.5
-mesh2ww /path/to/meshtal.msht 104 --scale 2.5
+mesh2ww file.msht 104 --scale 2.5
 ```
 
 ### Multi-particle weight windows
@@ -180,9 +177,9 @@ delimiter.
 
 ```bash
 # Syntax for combining weights for multiple particle types
-mesh2ww <meshtal> <number> [options] +      \
-        <meshtal> <number> [options] +      \
-        <meshtal> <number> [options]
+mesh2ww <file> <number> [options] +      \
+        <file> <number> [options] +      \
+        <file> <number> [options]
 ```
 
 For example:
@@ -243,7 +240,7 @@ respectively.
 
 ```bash
 # Set energy group power factors individually
-mesh2ww /path/to/meshtal.msht 104 --power 0.8 0.7 0.65
+mesh2ww file.msht 104 --power 0.8 0.7 0.65
 ```
 
 This also applies to time bins. To set values for all unique
@@ -265,5 +262,5 @@ Energy 100.0
 
 ```bash
 # Set energy and time group power factors individually
-mesh2ww /path/to/meshtal.msht 104 --power 0.9 0.7   0.8 0.8   0.6 0.5
+mesh2ww file.msht 104 --power 0.9 0.7   0.8 0.8   0.6 0.5
 ```

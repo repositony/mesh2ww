@@ -1,18 +1,19 @@
 [package]
 authors      = ["Tony <repositony@outlook.com>"]
 description  = "Command line tool to generate mesh-based weight windows"
-edition      = "2021"
+edition      = "2024"
 keywords     = ["mcnp", "mesh", "variance-reduction"]
 license      = "GPL-3.0 license"
 name         = "mesh2ww"
 readme       = "readme.md"
 repository   = "https://github.com/repositony/mesh2ww"
-rust-version = "1.82"
-version      = "1.0.0"
+rust-version = "1.85"
+version      = "1.1.0"
 
 [dependencies]
 # core library, not currently for public use
 ntools = { git = "ssh://git@github.com/repositony/ntools.git", branch = "main", features = [
+    "hdf5",
     "mesh",
     "weights",
     "wwgen",
